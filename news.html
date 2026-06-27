@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diesmos Discover</title>
+<title>Diesmos News</title>
 
 <style>
 :root{
@@ -28,7 +28,7 @@ body{
   color:var(--dark);
 }
 
-/* HEADER */
+
 header{
   position:sticky;
   top:0;
@@ -43,7 +43,7 @@ header{
   gap:10px;
 }
 
-/* BUTTONS */
+
 .btn{
   background:white;
   border:none;
@@ -56,14 +56,14 @@ header{
   display:inline-block;
 }
 
-/* FEED */
+
 #feed{
   max-width:900px;
   margin:auto;
   padding:20px;
 }
 
-/* CARD */
+
 .card{
   background:var(--card);
   border-radius:18px;
@@ -98,7 +98,7 @@ header{
   color:var(--muted);
 }
 
-/* STORY */
+
 #storyPage{
   display:none;
   max-width:800px;
@@ -141,18 +141,18 @@ header{
 <body>
 
 <header>
-  📰 Diesmos Discover
+  📰 Diesmos News
 
   <div style="display:flex; gap:8px;">
     <a class="btn" href="https://diesmos.online">🎮 Games</a>
-    <button class="btn" onclick="backToFeed()">📰 Discover</button>
+    <button class="btn" onclick="backToFeed()">📰 News</button>
   </div>
 </header>
 
-<!-- FEED -->
+
 <div id="feed"></div>
 
-<!-- STORY -->
+
 <div id="storyPage">
   <div class="storyBox" id="storyBox"></div>
 </div>
@@ -168,7 +168,7 @@ const feeds = [
 let index = 0;
 let loading = false;
 
-/* LOAD FEED */
+
 async function loadFeed(){
 
   if(loading) return;
@@ -213,7 +213,7 @@ async function loadFeed(){
   loading = false;
 }
 
-/* OPEN STORY */
+
 function openStory(item){
 
   document.getElementById("feed").style.display = "none";
@@ -242,13 +242,13 @@ function openStory(item){
   `;
 }
 
-/* BACK TO FEED */
+
 function backToFeed(){
   document.getElementById("storyPage").style.display = "none";
   document.getElementById("feed").style.display = "block";
 }
 
-/* INFINITE SCROLL */
+
 window.addEventListener("scroll", () => {
   if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 400){
     loadFeed();
