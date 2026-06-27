@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diesmos Discover</title>
+
+<style>
+:root{
+  --bg1:#d4f8d4;
+  --bg2:#94df98;
+  --card:rgba(255,255,255,0.85);
+  --green:#5fb763;
+  --dark:#183817;
+  --muted:#4e704d;
+  --shadow:0 12px 30px rgba(0,0,0,0.15);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--dark);
+}
+
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:#78c77e;
+  padding:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:900;
+  color:white;
+  gap:10px;
+}
+
+/* BUTTONS */
+.btn{
+  background:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:999px;
+  font-weight:800;
+  cursor:pointer;
+  color:#2f7d34;
+  text-decoration:none;
+  display:inline-block;
+}
+
+/* FEED */
+#feed{
+  max-width:900px;
+  margin:auto;
+  padding:20px;
+}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border-radius:18px;
+  margin-bottom:15px;
+  overflow:hidden;
+  cursor:pointer;
+  box-shadow:var(--shadow);
+  transition:0.2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+}
+
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.card .content{
+  padding:15px;
+}
+
+.card h2{
+  font-size:18px;
+  margin-bottom:6px;
+}
+
+.card p{
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* STORY */
+#storyPage{
+  display:none;
+  max-width:800px;
+  margin:auto;
+  padding:20px;
+}
+
+.storyBox{
+  background:rgba(255,255,255,0.9);
+  border-radius:16px;
+  padding:15px;
+  box-shadow:var(--shadow);
+}
+
+.storyBox img{
+  width:100%;
+  border-radius:14px;
+  margin-bottom:10px;
+}
+
+.storyBox h1{
+  margin-bottom:10px;
+}
+
+.meta{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:10px;
+}
+
+.storyContent{
+  line-height:1.6;
+  font-size:14px;
+  color:#2a3f2a;
+  white-space:pre-wrap;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  📰 Diesmos Discover
+
+  <div style="display:flex; gap:8px;">
+    <a class="btn" href="https://diesmos.online">🎮 Games</a>
+    <button class="btn" onclick="backToFeed()">📰 Discover</button>
+  </div>
+</header>
+
+<!-- FEED -->
+<div id="feed"></div>
+
+<!-- STORY -->
+<div id="storyPage">
+  <div class="storyBox" id="storyBox"></div>
+</div>
+
+<script>
+
+const feeds = [
+  "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+  "http://feeds.bbci.co.uk/news/rss.xml",
+  "https://rss.cnn.com/rss/edition.rss"
+];
+
+let index = 0;
+let loading = false;
+
+/* LOAD FEED */
+async function loadFeed(){
+
+  if(loading) return;
+  loading = true;
+
+  const url =
+    "https://api.rss2json.com/v1/api.json?rss_url=" +
+    encodeURIComponent(feeds[index % feeds.length]);
+
+  try{
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const feed = document.getElementById("feed");
+
+    (data.items || []).forEach(item => {
+
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.onclick = () => openStory(item);
+
+      card.innerHTML = `
+        ${item.thumbnail ? `<img src="${item.thumbnail}">` : ""}
+        <div class="content">
+          <h2>${item.title}</h2>
+          <p>${(item.description || "").replace(/<[^>]*>/g,"").slice(0,140)}...</p>
+        </div>
+      `;
+
+      feed.appendChild(card);
+
+    });
+
+    index++;
+
+  }catch(e){
+    console.log(e);
+  }
+
+  loading = false;
+}
+
+/* OPEN STORY */
+function openStory(item){
+
+  document.getElementById("feed").style.display = "none";
+  document.getElementById("storyPage").style.display = "block";
+
+  const fullText =
+    item.content ||
+    item.description ||
+    "No full article text available from RSS feed.";
+
+  document.getElementById("storyBox").innerHTML = `
+    ${item.thumbnail ? `<img src="${item.thumbnail}">` : ""}
+    <h1>${item.title}</h1>
+
+    <div class="meta">
+      Source: ${item.author || "Unknown"}
+    </div>
+
+    <div class="storyContent">
+      ${fullText}
+    </div>
+
+    <button class="btn" onclick="window.open('${item.link}','_blank')">
+      Open Original Article
+    </button>
+  `;
+}
+
+/* BACK TO FEED */
+function backToFeed(){
+  document.getElementById("storyPage").style.display = "none";
+  document.getElementById("feed").style.display = "block";
+}
+
+/* INFINITE SCROLL */
+window.addEventListener("scroll", () => {
+  if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 400){
+    loadFeed();
+  }
+});
+
+/* INIT */
+loadFeed();
+
+</script>
+
+</body>
+</html>
