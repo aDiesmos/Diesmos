@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="description" content="Diesmos is a popular unblocked games site featuring hundreds of free games that can be played online. Play games anywhere with Diesmos Games.">
+  <meta name="keywords" content="Diesmos, unblocked games, free games, online games, browser games">
+  <meta name="author" content="Jayzcool">
+	<meta property="og:title" content="Diesmos Games">
+	<meta property="og:description" content="Play hundreds of free unblocked games on Diesmos. A popular gaming site for browser games.">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://diesmos.online">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -21,6 +28,21 @@
       --shadow: 0 24px 60px rgba(22, 65, 24, 0.18);
     }
 
+    html[data-theme="dark"] {
+      --bg-main: #061407;
+      --bg-secondary: #0f3514;
+      --panel: rgba(11, 41, 15, 0.91);
+      --panel-strong: rgba(16, 53, 20, 0.96);
+      --header: #14511d;
+      --nav: rgba(10, 48, 16, 0.96);
+      --primary: #79db7c;
+      --primary-dark: #38a845;
+      --text-main: #e9ffe9;
+      --text-muted: #b5dbb5;
+      --border: rgba(121, 219, 124, 0.38);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -35,6 +57,38 @@
         linear-gradient(135deg, var(--bg-main), var(--bg-secondary));
       scrollbar-width: thin;
       scrollbar-color: var(--primary-dark) rgba(255, 255, 255, 0.55);
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -10vh -10vw;
+      pointer-events: none;
+      z-index: 0;
+      background-repeat: no-repeat;
+      filter: blur(2px);
+      will-change: transform, opacity;
+    }
+
+    body::before {
+      opacity: 0.52;
+      background-image:
+        radial-gradient(ellipse at 20% 24%, rgba(255, 255, 255, 0.28) 0 18%, transparent 19%),
+        radial-gradient(ellipse at 48% 72%, rgba(95, 183, 99, 0.16) 0 20%, transparent 21%),
+        radial-gradient(ellipse at 80% 30%, rgba(255, 255, 255, 0.18) 0 16%, transparent 17%);
+      background-size: 42rem 18rem, 52rem 22rem, 44rem 20rem;
+      animation: waveDriftA 34s cubic-bezier(0.42, 0, 0.18, 1) infinite;
+    }
+
+    body::after {
+      opacity: 0.34;
+      background-image:
+        radial-gradient(ellipse at 10% 78%, rgba(63, 143, 67, 0.14) 0 18%, transparent 19%),
+        radial-gradient(ellipse at 62% 18%, rgba(255, 255, 255, 0.2) 0 17%, transparent 18%),
+        radial-gradient(ellipse at 88% 66%, rgba(95, 183, 99, 0.12) 0 16%, transparent 17%);
+      background-size: 50rem 22rem, 40rem 18rem, 46rem 20rem;
+      animation: waveDriftB 44s cubic-bezier(0.42, 0, 0.18, 1) infinite alternate;
     }
 
     body::-webkit-scrollbar {
@@ -57,7 +111,7 @@
       pointer-events: none;
       z-index: 0;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .visualizer-backdrop.active {
@@ -77,7 +131,7 @@
       height: 100%;
       display: block;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
       z-index: 0;
     }
 
@@ -119,7 +173,7 @@
       box-shadow: 0 18px 38px rgba(22, 65, 24, 0.34);
       overflow: hidden;
       cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .floating-music-disc:hover {
@@ -146,7 +200,7 @@
       border-radius: 999px;
       object-fit: cover;
       opacity: 0;
-      transition: opacity 0.2s ease;
+      transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .album-art.active {
@@ -156,6 +210,36 @@
     @keyframes albumSpin {
       to {
         transform: rotate(360deg);
+      }
+    }
+
+    @keyframes waveDriftA {
+      0% {
+        transform: translate3d(-1.5%, -0.5%, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(1.25%, 0.85%, 0) scale(1.025);
+      }
+      100% {
+        transform: translate3d(-1.5%, -0.5%, 0) scale(1);
+      }
+    }
+
+    @keyframes waveDriftB {
+      0% {
+        transform: translate3d(1%, 0.5%, 0) scale(1.015);
+      }
+      100% {
+        transform: translate3d(-1%, -0.5%, 0) scale(1.015);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
       }
     }
 
@@ -215,7 +299,7 @@
       color: var(--text-main);
       background: rgba(255, 255, 255, 0.74);
       cursor: pointer;
-      transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), background 0.28s cubic-bezier(0.22, 1, 0.36, 1), color 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     nav button:hover,
@@ -348,7 +432,7 @@
       background: var(--panel-strong);
       box-shadow: 0 16px 34px rgba(22, 65, 24, 0.14);
       cursor: pointer;
-      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .game-card:hover {
@@ -398,6 +482,19 @@
       word-break: break-word;
     }
 
+    .game-description {
+      margin: 0;
+      padding: 0 16px 16px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+
+    .game-description.empty {
+      font-style: italic;
+      opacity: 0.75;
+    }
+
     .favorite-btn {
       padding: 8px 10px;
       border-radius: 14px;
@@ -415,6 +512,39 @@
     .filter-btn.active {
       background: var(--primary);
       color: white;
+    }
+
+    .theme-toggle.active {
+      background: var(--primary-dark);
+      color: white;
+    }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .partner-card {
+      display: grid;
+      gap: 10px;
+      padding: 18px;
+      border-radius: 18px;
+      color: var(--text-main);
+      background: var(--panel-strong);
+      border: 2px solid var(--border);
+      box-shadow: 0 16px 34px rgba(22, 65, 24, 0.12);
+    }
+
+    .partner-card h3,
+    .partner-card p {
+      margin: 0;
+    }
+
+    .partner-card p {
+      color: var(--text-muted);
+      line-height: 1.5;
     }
 
     .pagination {
@@ -441,23 +571,32 @@
       backdrop-filter: blur(10px);
     }
 
-    .game-overlay.active {
-      display: grid;
-      grid-template-rows: auto minmax(0, 1fr);
-      gap: 12px;
+    .game-overlay.active,
+    .game-overlay.closing {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
     }
 
     .game-overlay.closing {
+      pointer-events: none;
+      animation: overlayFade 0.88s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+    }
+
+    .game-overlay-stage {
       display: grid;
       grid-template-rows: auto minmax(0, 1fr);
       gap: 12px;
-      animation: overlayFade 0.58s ease forwards;
+      width: min(1100px, 100%);
+      min-height: 0;
+      flex: 1;
+      max-height: 100%;
     }
 
-    .game-overlay.closing .game-overlay-header,
-    .game-overlay.closing .game-iframe-container {
-      transform-origin: bottom right;
-      animation: genieClose 0.58s cubic-bezier(0.62, 0, 0.2, 1) forwards;
+    .game-overlay.closing .game-overlay-stage {
+      transform-origin: 82% 100%;
+      will-change: transform, opacity, filter;
+      animation: genieClose 0.88s cubic-bezier(0.32, 0.72, 0, 1) forwards;
     }
 
     .game-overlay-header {
@@ -582,18 +721,22 @@
     @keyframes genieClose {
       0% {
         opacity: 1;
-        transform: translate(0, 0) scale(1, 1);
-        border-radius: inherit;
+        transform: perspective(900px) rotateX(0deg) scale(1, 1) translate3d(0, 0, 0);
+        filter: brightness(1) saturate(1);
       }
-      58% {
-        opacity: 0.9;
-        transform: translate(18vw, 18vh) scale(0.42, 0.14) skewX(10deg);
-        border-radius: 40% 40% 999px 999px;
+      30% {
+        opacity: 1;
+        transform: perspective(900px) rotateX(6deg) scale(0.82, 0.68) translate3d(4vw, 3vh, 0);
+      }
+      62% {
+        opacity: 0.92;
+        transform: perspective(900px) rotateX(22deg) scale(0.42, 0.12) translate3d(22vw, 32vh, -80px);
+        filter: brightness(0.95) saturate(0.92);
       }
       100% {
         opacity: 0;
-        transform: translate(44vw, 42vh) scale(0.04, 0.01) skewX(18deg);
-        border-radius: 999px;
+        transform: perspective(900px) rotateX(38deg) scale(0.06, 0.018) translate3d(38vw, 52vh, -200px);
+        filter: brightness(0.75) saturate(0.8);
       }
     }
 
@@ -620,12 +763,29 @@
     }
 
     .shortz-frame-wrap {
+      position: relative;
       width: min(100%, 430px);
       margin: 0 auto;
       padding: 16px;
       border-radius: 30px;
       background: linear-gradient(180deg, rgba(95, 183, 99, 0.2), rgba(255, 255, 255, 0.9));
       border: 3px solid var(--border);
+    }
+
+    .shortz-swipe-layer {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      bottom: 16px;
+      left: 16px;
+      border-radius: 22px;
+      z-index: 2;
+      touch-action: none;
+      cursor: grab;
+    }
+
+    .shortz-swipe-layer:active {
+      cursor: grabbing;
     }
 
     .shortz-frame {
@@ -661,6 +821,17 @@
       flex-wrap: wrap;
     }
 
+    .shortz-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    #shortzAutoscrollBtn.active {
+      background: var(--primary);
+      color: white;
+    }
+
     .shortz-title {
       font-weight: 900;
       font-size: 1.1rem;
@@ -678,7 +849,7 @@
       border: 2px solid var(--border);
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
-      transition: width 0.2s ease, padding 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      transition: width 0.32s cubic-bezier(0.22, 1, 0.36, 1), padding 0.32s cubic-bezier(0.22, 1, 0.36, 1), background 0.32s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .music-player-header,
@@ -700,7 +871,7 @@
     .volume-control {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       min-width: 180px;
       font-weight: 900;
       color: var(--text-muted);
@@ -713,7 +884,7 @@
     }
 
     .volume-value {
-      min-width: 38px;
+      min-width: 50px;
       text-align: right;
       font-size: 0.86rem;
     }
@@ -750,6 +921,103 @@
       min-width: 92px;
       min-height: 46px;
       box-shadow: var(--shadow);
+    }
+
+    .console-panel {
+      position: fixed;
+      right: 18px;
+      top: 18px;
+      z-index: 10001;
+      display: none;
+      width: min(560px, calc(100vw - 28px));
+      max-height: min(58vh, 620px);
+      overflow: hidden;
+      border-radius: 20px;
+      background: rgba(14, 24, 14, 0.92);
+      border: 2px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.28);
+      color: #dff7df;
+      backdrop-filter: blur(12px);
+    }
+
+    .console-panel.active {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .console-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .console-panel-heading {
+      display: grid;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .console-panel-title {
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .console-panel-subtitle {
+      color: rgba(223, 247, 223, 0.72);
+      font-size: 0.76rem;
+      line-height: 1.25;
+    }
+
+    .console-panel-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .console-panel-body {
+      margin: 0;
+      padding: 14px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font: 12px/1.5 Consolas, Menlo, Monaco, monospace;
+    }
+
+    .console-line {
+      margin: 0 0 10px;
+      padding: 8px 10px;
+      border-left: 3px solid rgba(223, 247, 223, 0.26);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .console-line-meta {
+      display: block;
+      margin-bottom: 4px;
+      color: rgba(223, 247, 223, 0.66);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .console-line-message {
+      display: block;
+    }
+
+    .console-line.warn {
+      color: #ffd27a;
+      border-left-color: #ffd27a;
+    }
+
+    .console-line.error {
+      color: #ff9d9d;
+      border-left-color: #ff9d9d;
     }
 
     footer {
@@ -1003,6 +1271,8 @@
       <button type="button" data-page-link="shortz" onclick="showPage('shortz')">Shortz</button>
       <button type="button" data-page-link="favorites" onclick="showPage('favorites')">Favorites</button>
       <button type="button" data-page-link="music" onclick="showPage('music')">Music</button>
+      <button type="button" data-page-link="partners" onclick="showPage('partners')">Partners</button>
+      <button type="button" class="theme-toggle" id="themeToggleBtn" onclick="toggleDarkMode()">Dark Mode</button>
     </nav>
 
     <section id="home" class="page active">
@@ -1040,6 +1310,7 @@
             <button type="button" class="filter-btn" onclick="openSuggestions()">Suggestions</button>
             <button type="button" class="filter-btn" onclick="openSiteInNewTab()">Open Site</button>
             <button type="button" class="filter-btn" onclick="window.open('https://discord.gg/pSzqUMzfZR', '_blank', 'noopener')">Discord</button>
+			<button type="button" class="filter-btn" onclick="window.open('https://diesmos.online/news.html', '_blank', 'noopener')">News</button>
           </div>
         </div>
         <div id="topPagination"></div>
@@ -1056,8 +1327,9 @@
           <input type="text" id="shortzInput" class="shortz-input" placeholder="Search for YouTube Shorts" value="underwater sigma cat on pibbie shorts for me hacka">
           <button type="button" class="filter-btn" onclick="searchShortz()">Search</button>
         </div>
-        <div class="shortz-frame-wrap">
+        <div class="shortz-frame-wrap" id="shortzFrameWrap">
           <iframe id="shortzFrame" class="shortz-frame" src="https://www.youtube.com/embed/YiEcmWi4pNI?playsinline=1&rel=0" title="Shortz Player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <div class="shortz-swipe-layer" id="shortzSwipeLayer" aria-hidden="true"></div>
           <div class="shortz-file-fallback" id="shortzFileFallback">
             <div>
               <h3>Shortz local mode</h3>
@@ -1071,7 +1343,11 @@
             <div class="shortz-title" id="shortzTitle">Featured short</div>
             <div class="shortz-subtitle" id="shortzStatus">Search for something to load a fresh set of shorts.</div>
           </div>
-          <button type="button" class="filter-btn" id="shortzNextBtn" onclick="nextShort()">Down</button>
+          <div class="shortz-controls">
+            <button type="button" class="filter-btn" id="shortzPrevBtn" onclick="prevShort()">Up</button>
+            <button type="button" class="filter-btn" id="shortzNextBtn" onclick="nextShort()">Down</button>
+            <button type="button" class="filter-btn" id="shortzAutoscrollBtn" onclick="toggleShortzAutoscroll()">Autoscroll</button>
+          </div>
         </div>
       </div>
     </section>
@@ -1080,6 +1356,17 @@
       <div class="panel">
         <h2>Favorites</h2>
         <div id="favoritesContainer" class="favorites-grid"></div>
+      </div>
+    </section>
+
+    <section id="partners" class="page">
+      <div class="panel">
+        <h2>WIP</h2>
+        <div class="partners-grid">
+          <article class="partner-card">
+          </article>
+          <article class="partner-card">
+        </div>
       </div>
     </section>
 
@@ -1094,11 +1381,11 @@
           <div class="cd-disc" id="musicCdDisc" aria-label="Song cover art">
             <img class="album-art" id="musicAlbumArt" alt="">
           </div>
-          <div class="music-player-track" id="musicTrackLabel">No track loaded</div>
+          <div class="music-player-track" id="musicTrackLabel">No MP3 Uploaded</div>
           <div class="music-player-controls">
-            <button type="button" class="filter-btn" id="musicPlayPauseBtn">Play</button>
-            <button type="button" class="filter-btn" id="musicLoopBtn">Loop Off</button>
-            <button type="button" class="filter-btn" id="musicUploadBtn">Upload Song</button>
+            <button type="button" class="filter-btn" id="musicPlayPauseBtn">▶️</button>
+            <button type="button" class="filter-btn" id="musicLoopBtn">🔁</button>
+            <button type="button" class="filter-btn" id="musicUploadBtn">Upload</button>
             <label class="volume-control" for="musicVolumeSlider">
               Vol
               <input type="range" id="musicVolumeSlider" min="0" max="100" value="100">
@@ -1118,39 +1405,51 @@
   <button type="button" class="floating-music-disc" id="floatingMusicDisc" aria-label="Open Music" onclick="openMusicTab()">
     <img class="album-art" id="floatingAlbumArt" alt="">
   </button>
-
-  <div class="game-overlay" id="gameOverlay" aria-hidden="true">
-    <div class="game-overlay-header">
-      <div class="game-overlay-title" id="overlayGameTitle">Loading game</div>
-      <div class="overlay-buttons">
-        <button type="button" class="overlay-btn download" id="downloadGameBtn">Download Game</button>
-        <button type="button" class="overlay-btn fullscreen" id="fullscreenBtn">Fullscreen</button>
-        <button type="button" class="close-overlay-btn" id="closeOverlayBtn">Exit Game</button>
+  <button type="button" class="floating-music-disc" id="consoleBtn" aria-label="Open Console" style="right: 96px;">
+    <span aria-hidden="true" style="font: 900 18px/1 Arial, sans-serif; color: #183817;">&lt;/&gt;</span>
+  </button>
+  <section class="console-panel" id="consolePanel" aria-hidden="true">
+    <div class="console-panel-header">
+      <div class="console-panel-heading">
+        <div class="console-panel-title">JS Console</div>
+        <div class="console-panel-subtitle">Logs, warnings, errors, and rejected promises from this page.</div>
+      </div>
+      <div class="console-panel-actions">
+        <button type="button" class="filter-btn" id="clearConsoleBtn">Clear</button>
+        <button type="button" class="filter-btn" id="closeConsoleBtn">Close</button>
       </div>
     </div>
-    <div class="game-iframe-container" id="gameIframeContainer">
-      <canvas class="overlay-visualizer" id="gameVisualizerCanvas" aria-hidden="true"></canvas>
-      <div class="game-loading" id="gameLoading">Loading game...</div>
-      <div class="game-error" id="gameError">
-        <div>
-          <div>Error loading game</div>
-          <button type="button" class="retry-btn" id="retryBtn">Retry Loading</button>
+    <pre class="console-panel-body" id="consoleOutput"></pre>
+  </section>
+
+  <div class="game-overlay" id="gameOverlay" aria-hidden="true">
+    <div class="game-overlay-stage">
+      <div class="game-overlay-header">
+        <div class="game-overlay-title" id="overlayGameTitle">Loading game</div>
+        <div class="overlay-buttons">
+          <button type="button" class="overlay-btn download" id="downloadGameBtn">Download Game</button>
+          <button type="button" class="overlay-btn" id="overlayConsoleBtn">Console</button>
+          <button type="button" class="overlay-btn fullscreen" id="fullscreenBtn">Fullscreen</button>
+          <button type="button" class="close-overlay-btn" id="closeOverlayBtn">Exit Game</button>
         </div>
       </div>
-      <iframe class="game-iframe" id="gameIframe" title="Game player" sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-forms allow-popups allow-modals allow-downloads allow-presentation" allow="pointer-lock; fullscreen; autoplay; camera; microphone; display-capture; web-share" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+      <div class="game-iframe-container" id="gameIframeContainer">
+        <canvas class="overlay-visualizer" id="gameVisualizerCanvas" aria-hidden="true"></canvas>
+        <div class="game-loading" id="gameLoading">Loading game...</div>
+        <div class="game-error" id="gameError">
+          <div>
+            <div>Error loading game</div>
+            <button type="button" class="retry-btn" id="retryBtn">Retry Loading</button>
+          </div>
+        </div>
+        <iframe class="game-iframe" id="gameIframe" title="Game player" sandbox="allow-scripts allow-same-origin allow-pointer-lock allow-forms allow-popups allow-modals allow-downloads allow-presentation" allow="pointer-lock; fullscreen; autoplay; camera; microphone; display-capture; web-share" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+      </div>
     </div>
   </div>
 
-  <script src="https://fastly.jsdelivr.net/gh/aDiesmos/HTMLFILES@911831d042122977d980eb695f11f57ae0383db0/main.js" defer></script>
+  <script src="https://testingcf.jsdelivr.net/gh/aDiesmos/HTMLFILES@911831d042122977d980eb695f11f57ae0383db0/main.js" defer></script>
   <script>
-    const starterGames = [
-      { title: 'Slope', tag: 'new', icon: 'S' },
-      { title: 'Retro Bowl', tag: 'all', icon: 'R' },
-      { title: 'Run 3', tag: 'all', icon: '3' },
-      { title: '1v1.LOL', tag: 'new', icon: '1' },
-      { title: 'Minecraft Classic', tag: 'all', icon: 'M' },
-      { title: 'Geometry Dash', tag: 'new', icon: 'G' }
-    ];
+    const starterGames = [];
 
     const SHORTZ_API_HOSTS = [
       'https://inv.nadeko.net',
@@ -1165,6 +1464,18 @@
     let shortzIndex = 0;
     let shortzHasLoaded = false;
     let shortzSearchAvailable = true;
+    const SHORTZ_AUTOSCROLL_KEY = 'diesmos.shortz.autoscroll';
+    const SHORTZ_DEFAULT_DURATION_MS = 30000;
+    const SHORTZ_SWIPE_THRESHOLD = 50;
+    let shortzAutoscrollEnabled = false;
+    let shortzAutoscrollTimer = null;
+    let shortzQuery = '';
+    let shortzNextPage = 2;
+    let shortzLoadingMore = false;
+    let shortzHasMore = true;
+    const SHORTZ_PREFETCH_THRESHOLD = 5;
+    const GENIE_CLOSE_MS = 880;
+    let genieCloseTimer = null;
     let fallbackFavorites = [];
     let fallbackGamesActive = false;
     let skipCloseWarning = false;
@@ -1173,6 +1484,26 @@
     function changeText() {
       const textEl = document.getElementById('text');
       if (textEl) textEl.innerText = 'cool';
+    }
+
+    function setDarkMode(enabled, persist = true) {
+      document.documentElement.dataset.theme = enabled ? 'dark' : 'light';
+      if (persist) localStorage.setItem('diesmos.theme', enabled ? 'dark' : 'light');
+
+      const button = document.getElementById('themeToggleBtn');
+      if (button) {
+        button.classList.toggle('active', enabled);
+        button.textContent = enabled ? 'Light Mode' : 'Dark Mode';
+        button.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+      }
+    }
+
+    function toggleDarkMode() {
+      setDarkMode(document.documentElement.dataset.theme !== 'dark');
+    }
+
+    function initTheme() {
+      setDarkMode(localStorage.getItem('diesmos.theme') === 'dark');
     }
 
     function showPage(page) {
@@ -1207,18 +1538,32 @@
       if (frame) {
         frame.onload = null;
         frame.removeAttribute('srcdoc');
-        frame.removeAttribute('src');
+        frame.src = 'about:blank';
+      }
+      if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+        const exit = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+        if (exit) exit.call(document);
       }
     }
 
     function genieCloseGame() {
       const overlay = document.getElementById('gameOverlay');
-      if (!overlay || !overlay.classList.contains('active')) {
+      if (!overlay || overlay.classList.contains('closing')) return;
+      if (!overlay.classList.contains('active')) {
         finishGenieCloseGame();
         return;
       }
+
+      document.body.style.overflow = '';
+      overlay.classList.remove('active');
       overlay.classList.add('closing');
-      window.setTimeout(finishGenieCloseGame, 620);
+      overlay.setAttribute('aria-hidden', 'true');
+
+      if (genieCloseTimer) window.clearTimeout(genieCloseTimer);
+      genieCloseTimer = window.setTimeout(() => {
+        genieCloseTimer = null;
+        finishGenieCloseGame();
+      }, GENIE_CLOSE_MS);
     }
 
     function getFavorites() {
@@ -1262,8 +1607,10 @@
             <div class="game-title">${game.title}</div>
             <button type="button" class="favorite-btn ${favorites.includes(game.title) ? 'favorited' : ''}" data-game="${game.title}" aria-label="Favorite ${game.title}">Heart</button>
           </div>
+          <p class="game-description" data-game-description="${game.id || game.title}">Loading description...</p>
         </article>
       `).join('') || '<p class="empty-state">No games found.</p>';
+      loadGameDescriptions(grid);
 
       const gameCount = document.getElementById('gameCount');
       const homeGameCount = document.getElementById('homeGameCount');
@@ -1276,9 +1623,102 @@
       if (!container) return;
       const favorites = getFavorites();
       container.innerHTML = favorites.length
-        ? favorites.map((title) => `<article class="game-card"><div class="game-art">${title.charAt(0)}</div><div class="game-info"><div class="game-title">${title}</div></div></article>`).join('')
+        ? favorites.map((title) => `<article class="game-card"><div class="game-art">${title.charAt(0)}</div><div class="game-info"><div class="game-title">${title}</div></div><p class="game-description" data-game-description="${title}">Loading description...</p></article>`).join('')
         : '<p class="empty-state">No favorites yet.</p>';
+      loadGameDescriptions(container);
       updateFavoriteCount();
+    }
+
+    const gameDescriptionCache = new Map();
+
+    function slugifyGameTitle(value) {
+      return String(value || '')
+        .toLowerCase()
+        .replace(/&/g, 'and')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    function getGameDescriptionSources(gameKey, title) {
+      const slug = slugifyGameTitle(gameKey || title);
+      const titleSlug = slugifyGameTitle(title);
+      return Array.from(new Set([
+        `descriptions/${slug}.txt`,
+        `game-descriptions/${slug}.txt`,
+        titleSlug && `descriptions/${titleSlug}.txt`,
+        titleSlug && `game-descriptions/${titleSlug}.txt`,
+        `${slug}.txt`
+      ].filter(Boolean)));
+    }
+
+    async function readGameDescription(gameKey, title) {
+      const cacheKey = slugifyGameTitle(gameKey || title);
+      if (gameDescriptionCache.has(cacheKey)) return gameDescriptionCache.get(cacheKey);
+
+      for (const source of getGameDescriptionSources(gameKey, title)) {
+        try {
+          const response = await fetch(source, { cache: 'no-store' });
+          if (!response.ok) continue;
+          const text = (await response.text()).trim();
+          if (text) {
+            gameDescriptionCache.set(cacheKey, text);
+            return text;
+          }
+        } catch (error) {
+        }
+      }
+
+      const fallback = 'No description file found yet.';
+      gameDescriptionCache.set(cacheKey, fallback);
+      return fallback;
+    }
+
+    function getCardGameTitle(card) {
+      const title = card.querySelector('.game-title');
+      const image = card.querySelector('.game-image');
+      return title ? title.textContent.trim() : image ? image.alt.trim() : '';
+    }
+
+    function ensureGameDescription(card) {
+      if (!card || card.dataset.descriptionReady === 'true') return;
+      const title = getCardGameTitle(card);
+      if (!title) return;
+      card.dataset.descriptionReady = 'true';
+
+      let description = card.querySelector('.game-description');
+      if (!description) {
+        description = document.createElement('p');
+        description.className = 'game-description';
+        const info = card.querySelector('.game-info');
+        if (info && info.parentNode === card) {
+          info.insertAdjacentElement('afterend', description);
+        } else {
+          card.appendChild(description);
+        }
+      }
+
+      const gameKey = description.dataset.gameDescription || card.dataset.gameId || title;
+      description.textContent = 'Loading description...';
+      readGameDescription(gameKey, title).then((text) => {
+        description.textContent = text;
+        description.classList.toggle('empty', text === 'No description file found yet.');
+      });
+    }
+
+    function loadGameDescriptions(root = document) {
+      root.querySelectorAll('.game-card').forEach(ensureGameDescription);
+    }
+
+    function initGameDescriptionLoader() {
+      loadGameDescriptions();
+      const gamesGrid = document.getElementById('gamesGrid');
+      const favoritesGrid = document.getElementById('favoritesContainer');
+      [gamesGrid, favoritesGrid].filter(Boolean).forEach((target) => {
+        new MutationObserver(() => loadGameDescriptions(target)).observe(target, {
+          childList: true,
+          subtree: true
+        });
+      });
     }
 
     function openSuggestions() {
@@ -1315,8 +1755,27 @@
       const pieces = [];
       if (shortData.author) pieces.push(shortData.author);
       if (Number.isFinite(shortData.viewCount) && shortData.viewCount > 0) pieces.push(`${shortData.viewCount.toLocaleString()} views`);
-      pieces.push(`Short ${index + 1} of ${Math.max(total, 1)}`);
+      const totalLabel = shortzHasMore ? `${Math.max(total, 1)}+` : String(Math.max(total, 1));
+      pieces.push(`Short ${index + 1} of ${totalLabel}`);
       return pieces.join(' - ');
+    }
+
+    function refreshShortzStatus() {
+      const status = document.getElementById('shortzStatus');
+      const shortData = shortzResults[shortzIndex];
+      if (status && shortData) {
+        status.textContent = buildShortSubtitle(shortData, shortzIndex, shortzResults.length);
+      }
+    }
+
+    function mapShortzSearchItem(item) {
+      return {
+        videoId: item.videoId,
+        title: item.title || 'Untitled short',
+        author: item.author || '',
+        viewCount: typeof item.viewCount === 'number' ? item.viewCount : 0,
+        lengthSeconds: typeof item.lengthSeconds === 'number' ? item.lengthSeconds : 0
+      };
     }
 
     function loadShortEmbed(result) {
@@ -1333,7 +1792,8 @@
       if (!shortData || !shortData.videoId) {
         title.textContent = 'Nothing loaded';
         status.textContent = 'No short is ready yet.';
-        nextBtn.disabled = true;
+        updateShortzNavButtons();
+        clearShortzAutoscrollTimer();
         return;
       }
 
@@ -1349,7 +1809,9 @@
 
       title.textContent = shortData.title || 'Untitled short';
       status.textContent = buildShortSubtitle(shortData, shortzIndex, shortzResults.length);
-      nextBtn.disabled = shortzResults.length <= 1 && !shortzSearchAvailable;
+      updateShortzNavButtons();
+      clearShortzAutoscrollTimer();
+      scheduleShortzAutoscroll();
     }
 
     async function searchShortz() {
@@ -1368,6 +1830,10 @@
       status.textContent = 'Looking for shorts...';
 
       try {
+        shortzQuery = query;
+        shortzNextPage = 2;
+        shortzHasMore = true;
+        shortzLoadingMore = false;
         const results = await fetchShortzResults(query);
         if (!results.length) {
           title.textContent = 'No shorts found';
@@ -1379,8 +1845,11 @@
         shortzIndex = 0;
         shortzSearchAvailable = true;
         loadShortEmbed();
+        prefetchShortzPages();
       } catch (error) {
         shortzSearchAvailable = false;
+        shortzQuery = '';
+        shortzHasMore = false;
         shortzResults = [{ videoId: 'YiEcmWi4pNI', title: 'Featured video', author: 'YouTube', viewCount: 0 }];
         shortzIndex = 0;
         title.textContent = 'Search unavailable';
@@ -1391,7 +1860,7 @@
 
     async function fetchShortzResults(query) {
       try {
-        return await fetchShortzFromBrowser(query);
+        return await fetchShortzPage(query, 1);
       } catch (error) {
         if (hasAppsScriptBridge()) {
           return fetchShortzFromAppsScript(query);
@@ -1400,14 +1869,14 @@
       }
     }
 
-    async function fetchShortzFromBrowser(query) {
+    async function fetchShortzPage(query, page) {
       const searchQuery = encodeURIComponent(`type:video duration:short ${query}`);
       const availableHosts = SHORTZ_API_HOSTS.filter((host) => !shortzFailedHosts.has(host));
       const hostsToTry = availableHosts.length ? availableHosts : SHORTZ_API_HOSTS;
 
       for (const host of hostsToTry) {
         try {
-          const response = await fetch(`${host}/api/v1/search?q=${searchQuery}`, { headers: { Accept: 'application/json' } });
+          const response = await fetch(`${host}/api/v1/search?q=${searchQuery}&page=${page}`, { headers: { Accept: 'application/json' } });
           if (!response.ok) {
             shortzFailedHosts.add(host);
             continue;
@@ -1417,21 +1886,73 @@
           const mapped = (Array.isArray(data) ? data : [])
             .filter((item) => item && (item.type === 'video' || item.type === 'shortVideo' || item.videoId))
             .filter((item) => !item.lengthSeconds || item.lengthSeconds <= 180)
-            .map((item) => ({
-              videoId: item.videoId,
-              title: item.title || 'Untitled short',
-              author: item.author || '',
-              viewCount: typeof item.viewCount === 'number' ? item.viewCount : 0
-            }))
+            .map(mapShortzSearchItem)
             .filter((item) => item.videoId);
 
-          if (mapped.length) return mapped;
+          return mapped;
         } catch (error) {
           shortzFailedHosts.add(host);
         }
       }
 
       throw new Error('No short search hosts available');
+    }
+
+    async function loadMoreShortz() {
+      if (!shortzQuery || shortzLoadingMore || !shortzHasMore || !shortzSearchAvailable) return false;
+      shortzLoadingMore = true;
+      try {
+        const page = shortzNextPage;
+        const newItems = await fetchShortzPage(shortzQuery, page);
+        shortzNextPage = page + 1;
+
+        if (!newItems.length) {
+          shortzHasMore = false;
+          updateShortzNavButtons();
+          refreshShortzStatus();
+          return false;
+        }
+
+        const seen = new Set(shortzResults.map((item) => item.videoId));
+        const unique = newItems.filter((item) => item.videoId && !seen.has(item.videoId));
+
+        if (!unique.length) {
+          if (page >= 25) {
+            shortzHasMore = false;
+            updateShortzNavButtons();
+            refreshShortzStatus();
+            return false;
+          }
+          shortzLoadingMore = false;
+          return loadMoreShortz();
+        }
+
+        shortzResults = shortzResults.concat(unique);
+        updateShortzNavButtons();
+        refreshShortzStatus();
+        return true;
+      } catch (error) {
+        shortzHasMore = false;
+        updateShortzNavButtons();
+        refreshShortzStatus();
+        return false;
+      } finally {
+        shortzLoadingMore = false;
+      }
+    }
+
+    function maybeLoadMoreShortz() {
+      if (!shortzQuery || !shortzHasMore || shortzLoadingMore) return;
+      if (shortzIndex >= shortzResults.length - SHORTZ_PREFETCH_THRESHOLD) {
+        loadMoreShortz();
+      }
+    }
+
+    async function prefetchShortzPages() {
+      while (shortzHasMore && shortzResults.length < 50) {
+        const loaded = await loadMoreShortz();
+        if (!loaded) break;
+      }
     }
 
     function hasAppsScriptBridge() {
@@ -1447,10 +1968,147 @@
       });
     }
 
-    function nextShort() {
+    async function nextShort() {
       if (!shortzResults.length) return;
-      shortzIndex = (shortzIndex + 1) % shortzResults.length;
+
+      if (shortzIndex < shortzResults.length - 1) {
+        shortzIndex += 1;
+        loadShortEmbed();
+        maybeLoadMoreShortz();
+        return;
+      }
+
+      if (!shortzHasMore) {
+        if (shortzResults.length > 1) {
+          shortzIndex = 0;
+          loadShortEmbed();
+        }
+        return;
+      }
+
+      clearShortzAutoscrollTimer();
+      const status = document.getElementById('shortzStatus');
+      if (status) status.textContent = 'Loading more shorts...';
+
+      const loaded = await loadMoreShortz();
+      if (loaded && shortzIndex < shortzResults.length - 1) {
+        shortzIndex += 1;
+        loadShortEmbed();
+        maybeLoadMoreShortz();
+      } else if (!loaded && shortzResults.length > 1) {
+        shortzIndex = 0;
+        loadShortEmbed();
+      } else {
+        refreshShortzStatus();
+      }
+    }
+
+    function prevShort() {
+      if (shortzIndex <= 0) return;
+      shortzIndex -= 1;
       loadShortEmbed();
+    }
+
+    function updateShortzNavButtons() {
+      const nextBtn = document.getElementById('shortzNextBtn');
+      const prevBtn = document.getElementById('shortzPrevBtn');
+      const atStart = shortzIndex <= 0;
+      const atEnd = shortzIndex >= shortzResults.length - 1;
+      if (prevBtn) prevBtn.disabled = atStart || !shortzResults.length;
+      if (nextBtn) {
+        nextBtn.disabled = !shortzResults.length || (atEnd && !shortzHasMore && shortzResults.length <= 1);
+      }
+    }
+
+    function updateShortzAutoscrollButton() {
+      const btn = document.getElementById('shortzAutoscrollBtn');
+      if (!btn) return;
+      btn.classList.toggle('active', shortzAutoscrollEnabled);
+      btn.textContent = shortzAutoscrollEnabled ? 'Autoscroll On' : 'Autoscroll';
+    }
+
+    function clearShortzAutoscrollTimer() {
+      if (shortzAutoscrollTimer) {
+        clearTimeout(shortzAutoscrollTimer);
+        shortzAutoscrollTimer = null;
+      }
+    }
+
+    function getShortzDurationMs(shortData) {
+      if (shortData && shortData.lengthSeconds > 0) {
+        return Math.min(shortData.lengthSeconds * 1000, 180000);
+      }
+      return SHORTZ_DEFAULT_DURATION_MS;
+    }
+
+    function scheduleShortzAutoscroll() {
+      if (!shortzAutoscrollEnabled || !shortzResults.length) return;
+      const shortData = shortzResults[shortzIndex];
+      shortzAutoscrollTimer = window.setTimeout(() => {
+        shortzAutoscrollTimer = null;
+        nextShort();
+      }, getShortzDurationMs(shortData));
+    }
+
+    function toggleShortzAutoscroll() {
+      shortzAutoscrollEnabled = !shortzAutoscrollEnabled;
+      try {
+        localStorage.setItem(SHORTZ_AUTOSCROLL_KEY, shortzAutoscrollEnabled ? '1' : '0');
+      } catch (error) {}
+      updateShortzAutoscrollButton();
+      clearShortzAutoscrollTimer();
+      scheduleShortzAutoscroll();
+    }
+
+    function initShortzGestures() {
+      const wrap = document.getElementById('shortzFrameWrap');
+      const layer = document.getElementById('shortzSwipeLayer');
+      if (!wrap || !layer) return;
+
+      let touchStartY = null;
+      let pointerStartY = null;
+      let wheelLocked = false;
+
+      const handleSwipe = (deltaY) => {
+        const shortzPage = document.getElementById('shortz');
+        if (!shortzPage || !shortzPage.classList.contains('active')) return;
+        if (Math.abs(deltaY) < SHORTZ_SWIPE_THRESHOLD) return;
+        if (deltaY < 0) nextShort();
+        else prevShort();
+      };
+
+      layer.addEventListener('touchstart', (event) => {
+        touchStartY = event.changedTouches[0].clientY;
+      }, { passive: true });
+
+      layer.addEventListener('touchend', (event) => {
+        if (touchStartY === null) return;
+        handleSwipe(event.changedTouches[0].clientY - touchStartY);
+        touchStartY = null;
+      }, { passive: true });
+
+      layer.addEventListener('pointerdown', (event) => {
+        pointerStartY = event.clientY;
+      });
+
+      layer.addEventListener('pointerup', (event) => {
+        if (pointerStartY === null) return;
+        handleSwipe(event.clientY - pointerStartY);
+        pointerStartY = null;
+      });
+
+      wrap.addEventListener('wheel', (event) => {
+        const shortzPage = document.getElementById('shortz');
+        if (!shortzPage || !shortzPage.classList.contains('active')) return;
+        if (wheelLocked || Math.abs(event.deltaY) < 20) return;
+        event.preventDefault();
+        wheelLocked = true;
+        if (event.deltaY > 0) nextShort();
+        else prevShort();
+        window.setTimeout(() => {
+          wheelLocked = false;
+        }, 400);
+      }, { passive: false });
     }
 
     function openCurrentShort() {
@@ -1464,6 +2122,228 @@
       if (!player || !button) return;
       player.classList.toggle('collapsed');
       button.textContent = player.classList.contains('collapsed') ? 'Music' : 'Hide';
+    }
+
+    const consoleState = {
+      lines: [],
+      maxLines: 200
+    };
+
+    function formatConsoleValue(value) {
+      if (typeof value === 'string') return value;
+      if (value instanceof Error) return value.stack || value.message || String(value);
+      try {
+        return typeof value === 'object' ? JSON.stringify(value, null, 2) : String(value);
+      } catch (error) {
+        return String(value);
+      }
+    }
+
+    function formatErrorEvent(event) {
+      const details = [];
+      if (event.message) details.push(`Message: ${event.message}`);
+
+      const location = [
+        event.filename || '',
+        event.lineno ? `line ${event.lineno}` : '',
+        event.colno ? `column ${event.colno}` : ''
+      ].filter(Boolean).join(' ');
+
+      if (location) details.push(`Location: ${location}`);
+
+      if (event.error) {
+        const fullError = formatConsoleValue(event.error);
+        if (fullError && !details.includes(fullError)) details.push(`Stack:\n${fullError}`);
+      }
+
+      return details.join('\n') || 'Uncaught error';
+    }
+
+    function getResourceUrl(element) {
+      return element.currentSrc || element.src || element.href || element.data || element.poster || '';
+    }
+
+    function getResourceType(element) {
+      const tag = element.tagName ? element.tagName.toLowerCase() : 'resource';
+      const labels = {
+        img: 'Image file',
+        script: 'Script file',
+        link: 'Stylesheet or linked file',
+        iframe: 'Iframe page',
+        audio: 'Audio file',
+        video: 'Video file',
+        source: 'Media source',
+        object: 'Object/embed file',
+        embed: 'Embedded file'
+      };
+      return labels[tag] || `${tag} resource`;
+    }
+
+    function formatResourceError(event) {
+      const target = event.target;
+      if (!(target instanceof Element) || target === window) return '';
+
+      const resourceUrl = getResourceUrl(target);
+      const className = typeof target.className === 'string' ? target.className.trim().replace(/\s+/g, '.') : '';
+      return [
+        `${getResourceType(target)} failed to load.`,
+        resourceUrl ? `Missing or blocked file: ${resourceUrl}` : 'Missing or blocked file: unknown URL',
+        target.id ? `Element id: #${target.id}` : '',
+        className ? `Element class: .${className}` : '',
+        `Element tag: <${target.tagName.toLowerCase()}>`
+      ].filter(Boolean).join('\n');
+    }
+
+    function getConsoleLevelLabel(level) {
+      const labels = {
+        info: 'Info',
+        warn: 'Warning',
+        error: 'Error'
+      };
+      return labels[level] || 'Log';
+    }
+
+    function getConsoleTimestamp() {
+      return new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+    }
+
+    function appendConsoleLine(level, args) {
+      const output = document.getElementById('consoleOutput');
+      if (!output) return;
+      const line = document.createElement('div');
+      line.className = `console-line ${level || ''}`.trim();
+      const meta = document.createElement('span');
+      meta.className = 'console-line-meta';
+      meta.textContent = `${getConsoleLevelLabel(level)} at ${getConsoleTimestamp()}`;
+      const message = document.createElement('span');
+      message.className = 'console-line-message';
+      message.textContent = args.map(formatConsoleValue).join(' ');
+      line.appendChild(meta);
+      line.appendChild(message);
+      output.appendChild(line);
+      consoleState.lines.push(line);
+      while (consoleState.lines.length > consoleState.maxLines) {
+        const first = consoleState.lines.shift();
+        if (first && first.parentNode) first.parentNode.removeChild(first);
+      }
+      output.scrollTop = output.scrollHeight;
+    }
+
+    function setConsolePanelOpen(open) {
+      const panel = document.getElementById('consolePanel');
+      const floatingButton = document.getElementById('consoleBtn');
+      const overlayButton = document.getElementById('overlayConsoleBtn');
+      if (!panel) return;
+
+      panel.classList.toggle('active', open);
+      panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+
+      if (floatingButton) {
+        floatingButton.setAttribute('aria-label', open ? 'Close Console' : 'Open Console');
+      }
+
+      if (overlayButton) {
+        overlayButton.textContent = open ? 'Hide Console' : 'Console';
+        overlayButton.setAttribute('aria-pressed', open ? 'true' : 'false');
+      }
+    }
+
+    function toggleConsolePanel() {
+      const panel = document.getElementById('consolePanel');
+      if (!panel) return;
+      setConsolePanelOpen(!panel.classList.contains('active'));
+    }
+
+    function initConsolePanel() {
+      const panel = document.getElementById('consolePanel');
+      const button = document.getElementById('consoleBtn');
+      const overlayButton = document.getElementById('overlayConsoleBtn');
+      const clearBtn = document.getElementById('clearConsoleBtn');
+      const closeBtn = document.getElementById('closeConsoleBtn');
+      const output = document.getElementById('consoleOutput');
+      if (!panel || panel.dataset.ready === 'true') return;
+      panel.dataset.ready = 'true';
+
+	  const original = {
+	    log: console.log.bind(console),
+	    info: console.info.bind(console),
+	    warn: console.warn.bind(console),
+	    error: console.error.bind(console),
+	    debug: console.debug ? console.debug.bind(console) : console.log.bind(console)
+	  };
+
+	  function toFullString(v) {
+	    if (v instanceof Error) {
+	      return v.stack || `${v.name}: ${v.message}`;
+	    }
+
+	    if (typeof v === 'object') {
+	      try {
+	        return JSON.stringify(v, null, 2);
+	      } catch {
+	        return Object.prototype.toString.call(v);
+	      }
+	    }
+
+	    return String(v);
+	  }
+
+	  ['log', 'info', 'warn', 'error', 'debug'].forEach((method) => {
+	    console[method] = function (...args) {
+	      original[method].apply(console, args);
+
+	      appendConsoleLine(
+	        method,
+	        args.map(toFullString)
+	      );
+	    };
+	  });
+
+	  window.addEventListener('error', (event) => {
+	    const err = event.error;
+
+	    appendConsoleLine('error', [
+	      err?.stack ||
+	      `${event.message}\n${event.filename}:${event.lineno}:${event.colno}`
+	    ]);
+	  });
+
+	  window.addEventListener('error', (event) => {
+	    const resourceError = formatResourceError(event);
+	    if (resourceError) appendConsoleLine('error', [resourceError]);
+	  }, true);
+
+	  window.addEventListener('unhandledrejection', (event) => {
+	    const reason = event.reason;
+
+	    appendConsoleLine('error', [
+	      reason instanceof Error ? reason.stack : String(reason)
+	    ]);
+	  });
+      if (button) {
+        button.addEventListener('click', toggleConsolePanel);
+      }
+
+      if (overlayButton) {
+        overlayButton.addEventListener('click', toggleConsolePanel);
+      }
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          consoleState.lines = [];
+          if (output) output.innerHTML = '';
+        });
+      }
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => setConsolePanelOpen(false));
+      }
+
+      appendConsoleLine('info', ['Console ready']);
     }
 
     const audioViz = {
@@ -1750,7 +2630,7 @@
 
       loopBtn.addEventListener('click', () => {
         audio.loop = !audio.loop;
-        loopBtn.textContent = audio.loop ? 'Loop On' : 'Loop Off';
+        loopBtn.textContent = audio.loop ? '🔂' : '🔁';
       });
     }
 
@@ -1795,7 +2675,7 @@
           event.stopImmediatePropagation();
           if (!audio) return;
           audio.loop = !audio.loop;
-          target.textContent = audio.loop ? 'Loop On' : 'Loop Off';
+          target.textContent = audio.loop ? '🔂' : '🔁';
         }
       }, true);
     }
@@ -1861,11 +2741,19 @@
         }
       }, 1400);
       renderFavorites();
+      initTheme();
       initMusicPlayer();
+      initConsolePanel();
       initPlayerButtonFallbacks();
+      initGameDescriptionLoader();
       initGameImageUnloader();
       initCloseWarning();
       updateVisualizerState();
+      try {
+        shortzAutoscrollEnabled = localStorage.getItem(SHORTZ_AUTOSCROLL_KEY) === '1';
+      } catch (error) {}
+      updateShortzAutoscrollButton();
+      initShortzGestures();
 
       if (musicCollapseBtn) musicCollapseBtn.addEventListener('click', toggleMusicPlayer);
       if (closeGameBtn) {
@@ -1928,14 +2816,18 @@
           genieCloseGame();
           return;
         }
-        if (event.key === 'ArrowDown' && shortzPage && shortzPage.classList.contains('active')) {
-          event.preventDefault();
-          nextShort();
+        if (shortzPage && shortzPage.classList.contains('active')) {
+          if (event.key === 'ArrowDown') {
+            event.preventDefault();
+            nextShort();
+          } else if (event.key === 'ArrowUp') {
+            event.preventDefault();
+            prevShort();
+          }
         }
-      });
+      }, true);
     });
   </script>
-<script async data-id="101481770" src="//static.getclicky.com/js"></script>
-<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101481770ns.gif" /></p></noscript>
+  <script async data-id="101481770" src="https://static.getclicky.com/js"></script>
 </body>
 </html>
