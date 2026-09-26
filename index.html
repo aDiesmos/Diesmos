@@ -842,6 +842,29 @@
       box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55), 0 0 45px rgba(69, 235, 110, 0.18);
     }
 
+    .shortz-frame-wrap.shortz-slide-next {
+      animation: shortzSlideNext 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .shortz-frame-wrap.shortz-slide-previous {
+      animation: shortzSlidePrevious 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes shortzSlideNext {
+      from { opacity: 0.35; transform: translateY(34px) scale(0.975); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes shortzSlidePrevious {
+      from { opacity: 0.35; transform: translateY(-34px) scale(0.975); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .shortz-frame-wrap.shortz-slide-next,
+      .shortz-frame-wrap.shortz-slide-previous { animation: none; }
+    }
+
     .shortz-swipe-layer {
       position: absolute;
       inset: 0;
@@ -1655,6 +1678,8 @@
     const SHORTZ_SWIPE_THRESHOLD = 50;
     let shortzAutoscrollEnabled = true;
     let shortzAutoscrollTimer = null;
+    let shortzTransitionDirection = 'next';
+    let musicFadeFrame = null;
     let shortzQuery = '';
     let shortzNextPage = 2;
     let shortzLoadingMore = false;
@@ -1693,6 +1718,11 @@
 
 
     function showPage(page) {
+      const shortzPage = document.getElementById('shortz');
+      if (shortzPage && shortzPage.classList.contains('active') && page !== 'shortz') {
+        unloadShortz();
+        fadeMusicForShortzExit();
+      }
       document.querySelectorAll('.page').forEach((pageEl) => pageEl.classList.remove('active'));
       document.querySelectorAll('[data-page-link]').forEach((link) => link.classList.toggle('active', link.dataset.pageLink === page));
       const target = document.getElementById(page);
@@ -1930,7 +1960,34 @@
     }
 
     function makeShortzEmbedUrl(videoId) {
-      return `https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&rel=0`;
+      return `https://www.youtube.com/embed/${videoId}?autoplay=1&playsinline=1&rel=0&controls=0`;
+    }
+
+    function unloadShortz() {
+      const frame = document.getElementById('shortzFrame');
+      clearShortzAutoscrollTimer();
+      resetShortzProgress();
+      if (frame) frame.src = 'about:blank';
+      shortzHasLoaded = false;
+    }
+
+    function fadeMusicForShortzExit() {
+      const audio = document.getElementById('musicAudio');
+      const slider = document.getElementById('musicVolumeSlider');
+      const value = document.getElementById('musicVolumeValue');
+      if (!audio || audio.paused || audio.volume <= 0) return;
+      if (musicFadeFrame) cancelAnimationFrame(musicFadeFrame);
+      const startingVolume = audio.volume;
+      const startedAt = performance.now();
+      const fade = (now) => {
+        const progress = Math.min(1, (now - startedAt) / 1200);
+        audio.volume = startingVolume * (1 - progress);
+        if (slider) slider.value = String(Math.round(audio.volume * 100));
+        if (value) value.textContent = `${Math.round(audio.volume * 100)}%`;
+        if (progress < 1) musicFadeFrame = requestAnimationFrame(fade);
+        else musicFadeFrame = null;
+      };
+      musicFadeFrame = requestAnimationFrame(fade);
     }
 
     function makeShortzWatchUrl(videoId) {
@@ -1981,6 +2038,12 @@
         return;
       }
 
+      const wrap = document.getElementById('shortzFrameWrap');
+      if (wrap) {
+        wrap.classList.remove('shortz-slide-next', 'shortz-slide-previous');
+        void wrap.offsetWidth;
+        wrap.classList.add(shortzTransitionDirection === 'previous' ? 'shortz-slide-previous' : 'shortz-slide-next');
+      }
       frame.style.display = 'block';
       frame.src = makeShortzEmbedUrl(shortData.videoId);
 
@@ -2170,6 +2233,7 @@
 
     async function nextShort() {
       if (!shortzResults.length) return;
+      shortzTransitionDirection = 'next';
 
       if (shortzIndex < shortzResults.length - 1) {
         shortzIndex += 1;
@@ -2205,6 +2269,7 @@
 
     function prevShort() {
       if (shortzIndex <= 0) return;
+      shortzTransitionDirection = 'previous';
       shortzIndex -= 1;
       loadShortEmbed();
     }
