@@ -1635,14 +1635,17 @@
     const starterGames = [];
 
     const SHORTZ_API_HOSTS = [
+      'https://invidious.f5.si',
       'https://inv.nadeko.net',
       'https://invidious.nerdvpn.de',
       'https://inv.thepixora.com',
       'https://yt.chocolatemoo53.com',
       'https://yewtu.be'
     ];
+    const SHORTZ_INSTANCE_DIRECTORY = 'https://api.invidious.io/instances.json?sort_by=health';
 
     const shortzFailedHosts = new Set();
+    let shortzApiHosts = null;
     let shortzResults = [{ videoId: 'YiEcmWi4pNI', title: 'Featured short', author: 'YouTube', viewCount: 0 }];
     let shortzIndex = 0;
     let shortzHasLoaded = false;
@@ -2050,8 +2053,9 @@
 
     async function fetchShortzPage(query, page) {
       const searchQuery = encodeURIComponent(`type:video duration:short ${query}`);
-      const availableHosts = SHORTZ_API_HOSTS.filter((host) => !shortzFailedHosts.has(host));
-      const hostsToTry = availableHosts.length ? availableHosts : SHORTZ_API_HOSTS;
+      const candidateHosts = await getShortzApiHosts();
+      const availableHosts = candidateHosts.filter((host) => !shortzFailedHosts.has(host));
+      const hostsToTry = availableHosts.length ? availableHosts : candidateHosts;
 
       for (const host of hostsToTry) {
         try {
@@ -2068,6 +2072,22 @@
       }
 
       throw new Error('No short search hosts available');
+    }
+
+    async function getShortzApiHosts() {
+      if (shortzApiHosts) return shortzApiHosts;
+      try {
+        const response = await fetch(SHORTZ_INSTANCE_DIRECTORY, { headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error('Instance directory unavailable');
+        const instances = await response.json();
+        const discoveredHosts = (Array.isArray(instances) ? instances : [])
+          .filter((instance) => Array.isArray(instance) && instance[1] && instance[1].api && instance[1].cors && instance[1].type === 'https')
+          .map((instance) => `https://${instance[0]}`);
+        shortzApiHosts = [...new Set([...discoveredHosts, ...SHORTZ_API_HOSTS])];
+      } catch (error) {
+        shortzApiHosts = SHORTZ_API_HOSTS;
+      }
+      return shortzApiHosts;
     }
 
     function mapShortzResults(data) {
@@ -2911,7 +2931,10 @@
       }, true);
     }
 
+    let gameImageRestoreObserver = null;
+
     function unloadGameImages() {
+      if (gameImageRestoreObserver) gameImageRestoreObserver.disconnect();
       document.querySelectorAll('.game-card img, img.game-image').forEach((image) => {
         if (image.dataset.unloadedForGame === 'true') return;
         image.dataset.unloadedForGame = 'true';
@@ -2926,18 +2949,39 @@
       });
     }
 
+    function restoreGameImage(image) {
+      if (image.dataset.unloadedForGame !== 'true') return;
+      if (image.dataset.savedSrc) {
+        image.setAttribute('src', image.dataset.savedSrc);
+        delete image.dataset.savedSrc;
+      }
+      if (image.dataset.savedSrcset) {
+        image.setAttribute('srcset', image.dataset.savedSrcset);
+        delete image.dataset.savedSrcset;
+      }
+      image.loading = 'lazy';
+      delete image.dataset.unloadedForGame;
+    }
+
     function restoreGameImages() {
-      document.querySelectorAll('img[data-unloaded-for-game="true"]').forEach((image) => {
-        if (image.dataset.savedSrc) {
-          image.setAttribute('src', image.dataset.savedSrc);
-          delete image.dataset.savedSrc;
-        }
-        if (image.dataset.savedSrcset) {
-          image.setAttribute('srcset', image.dataset.savedSrcset);
-          delete image.dataset.savedSrcset;
-        }
-        delete image.dataset.unloadedForGame;
-      });
+      const images = [...document.querySelectorAll('img[data-unloaded-for-game="true"]')];
+      if (!images.length) return;
+
+      if (!('IntersectionObserver' in window)) {
+        images.forEach(restoreGameImage);
+        return;
+      }
+
+      if (gameImageRestoreObserver) gameImageRestoreObserver.disconnect();
+      gameImageRestoreObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          restoreGameImage(entry.target);
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: '120px 0px', threshold: 0.01 });
+
+      images.forEach((image) => gameImageRestoreObserver.observe(image));
     }
 
     function initGameImageUnloader() {
