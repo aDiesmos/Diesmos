@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="description" content="Diesmos is a popular unblocked games site featuring hundreds of free games that can be played online. Play games anywhere with Diesmos Games.">
-  <meta name="keywords" content="Diesmos, unblocked games, free games, online games, browser games">
-  <meta name="author" content="Jayzcool">
+    <meta name="description" content="Diesmos is a popular unblocked games site featuring hundreds of free games that can be played online. Play games anywhere with Diesmos Games.">
+    
+    <meta name="keywords" content="Diesmos, unblocked games, free games, online games, browser games">
+    
+    <meta name="author" content="Jayzcool">
 	<meta property="og:title" content="Diesmos Games">
 	<meta property="og:description" content="Play hundreds of free unblocked games on Diesmos. A popular gaming site for browser games.">
 	<meta property="og:type" content="website">
@@ -41,6 +43,48 @@
       --text-muted: #b5dbb5;
       --border: rgba(121, 219, 124, 0.38);
       --shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+    }
+
+    html[data-glass="on"] {
+      --glass-button-bg: rgba(24, 24, 24, 0.56);
+      --glass-button-bg-hover: rgba(34, 34, 34, 0.68);
+      --glass-button-border: rgba(255, 255, 255, 0.22);
+      --glass-button-text: rgba(255, 255, 255, 0.94);
+    }
+
+    html[data-glass="on"] nav button,
+    html[data-glass="on"] .filter-btn,
+    html[data-glass="on"] .action-btn,
+    html[data-glass="on"] .overlay-btn,
+    html[data-glass="on"] .close-overlay-btn,
+    html[data-glass="on"] .retry-btn {
+      color: var(--glass-button-text);
+      background: var(--glass-button-bg);
+      border: 1px solid var(--glass-button-border);
+      border-radius: 999px;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -12px 26px rgba(0, 0, 0, 0.18),
+        0 14px 34px rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(22px) saturate(1.25);
+      -webkit-backdrop-filter: blur(22px) saturate(1.25);
+    }
+
+    html[data-glass="on"] nav button:hover,
+    html[data-glass="on"] nav button.active,
+    html[data-glass="on"] .filter-btn:hover,
+    html[data-glass="on"] .action-btn:hover,
+    html[data-glass="on"] .overlay-btn:hover,
+    html[data-glass="on"] .close-overlay-btn:hover,
+    html[data-glass="on"] .retry-btn:hover {
+      background: var(--glass-button-bg-hover);
+      border-color: rgba(255, 255, 255, 0.34);
+      color: white;
+    }
+
+    html[data-glass="on"] .glass-toggle.active {
+      background: rgba(42, 42, 42, 0.74);
+      color: white;
     }
 
     * {
@@ -750,35 +794,58 @@
     .shortz-shell {
       display: grid;
       gap: 18px;
+      padding: clamp(14px, 3vw, 30px);
+      overflow: hidden;
+      color: #f3fff2;
+      background: radial-gradient(circle at 50% 18%, #295b39 0, #0a170e 52%, #061009 100%);
+      border-color: rgba(116, 235, 138, 0.3);
+    }
+
+    .shortz-shell h2 {
+      margin: 0;
+      color: #efffef;
+      letter-spacing: -0.04em;
     }
 
     .shortz-topbar {
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
+      gap: 10px;
+      width: min(100%, 620px);
+      margin: 0 auto;
     }
 
     .shortz-topbar .shortz-input {
       flex: 1 1 280px;
+      color: #f3fff2;
+      background: rgba(4, 18, 8, 0.84);
+      border-color: rgba(126, 239, 147, 0.48);
+    }
+
+    .shortz-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 390px) 88px;
+      align-items: end;
+      justify-content: center;
+      gap: 18px;
+      width: min(100%, 600px);
+      margin: 0 auto;
     }
 
     .shortz-frame-wrap {
       position: relative;
-      width: min(100%, 430px);
-      margin: 0 auto;
-      padding: 16px;
-      border-radius: 30px;
-      background: linear-gradient(180deg, rgba(95, 183, 99, 0.2), rgba(255, 255, 255, 0.9));
-      border: 3px solid var(--border);
+      width: 100%;
+      padding: 0;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #0d1d12;
+      border: 2px solid rgba(153, 255, 167, 0.55);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55), 0 0 45px rgba(69, 235, 110, 0.18);
     }
 
     .shortz-swipe-layer {
       position: absolute;
-      top: 16px;
-      right: 16px;
-      bottom: 16px;
-      left: 16px;
-      border-radius: 22px;
+      inset: 0;
+      border-radius: 26px;
       z-index: 2;
       touch-action: none;
       cursor: grab;
@@ -793,14 +860,36 @@
       width: 100%;
       aspect-ratio: 9 / 16;
       border: 0;
-      border-radius: 22px;
+      border-radius: 26px;
       background: #101510;
+    }
+
+    .shortz-progress {
+      position: absolute;
+      right: 14px;
+      bottom: 12px;
+      left: 14px;
+      z-index: 3;
+      height: 4px;
+      overflow: hidden;
+      pointer-events: none;
+      border-radius: 999px;
+      background: rgba(235, 255, 237, 0.36);
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .shortz-progress-bar {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #48e76a, #c5ffd0);
+      box-shadow: 0 0 12px rgba(96, 255, 126, 0.85);
     }
 
     .shortz-file-fallback {
       display: none;
       min-height: 520px;
-      border-radius: 22px;
+      border-radius: 26px;
       padding: 24px;
       align-items: center;
       justify-content: center;
@@ -813,28 +902,114 @@
       display: flex;
     }
 
+    .shortz-action-rail {
+      display: grid;
+      gap: 14px;
+      padding-bottom: 12px;
+    }
+
+    .shortz-action {
+      display: grid;
+      justify-items: center;
+      gap: 5px;
+      padding: 0;
+      color: #f3fff2;
+      font: inherit;
+      font-size: 0.76rem;
+      font-weight: 900;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .shortz-action-icon {
+      display: grid;
+      place-items: center;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      color: #efffef;
+      font-size: 1.65rem;
+      background: rgba(105, 158, 113, 0.3);
+      border: 1px solid rgba(168, 255, 180, 0.18);
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .shortz-action:hover .shortz-action-icon,
+    .shortz-action:focus-visible .shortz-action-icon {
+      transform: scale(1.08);
+      background: #3b9a4d;
+      outline: none;
+    }
+
+    .shortz-action.liked .shortz-action-icon {
+      color: #d7ffe0;
+      background: #2f9b48;
+    }
+
+    .shortz-action--nav .shortz-action-icon {
+      background: rgba(74, 178, 93, 0.48);
+    }
+
     .shortz-results {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 14px;
-      flex-wrap: wrap;
+      width: min(100%, 600px);
+      margin: 0 auto;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(4, 20, 9, 0.72);
+      border: 1px solid rgba(153, 255, 167, 0.18);
     }
 
     .shortz-controls {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
+    .shortz-shell .filter-btn {
+      color: #efffef;
+      background: #286e38;
+      border-color: #7ce892;
+      box-shadow: 0 4px 0 #123f20;
+    }
+
     #shortzAutoscrollBtn.active {
-      background: var(--primary);
+      background: #3da953;
       color: white;
+      box-shadow: 0 4px 0 #1b5b2a;
+    }
+
+    #shortzAutoscrollBtn {
+      padding: 6px 9px;
+      font-size: 0.7rem;
+      box-shadow: 0 3px 0 #123f20;
     }
 
     .shortz-title {
       font-weight: 900;
       font-size: 1.1rem;
+    }
+
+    .shortz-subtitle {
+      margin-top: 3px;
+      color: #a9c8ae;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 560px) {
+      .shortz-stage {
+        grid-template-columns: minmax(0, 1fr) 62px;
+        gap: 10px;
+      }
+
+      .shortz-action-rail { gap: 10px; }
+      .shortz-action-icon { width: 52px; height: 52px; font-size: 1.35rem; }
+      .shortz-action { font-size: 0.65rem; }
+      .shortz-results { align-items: flex-start; flex-direction: column; }
     }
 
     .music-player {
@@ -1272,7 +1447,7 @@
       <button type="button" data-page-link="favorites" onclick="showPage('favorites')">Favorites</button>
       <button type="button" data-page-link="music" onclick="showPage('music')">Music</button>
       <button type="button" data-page-link="partners" onclick="showPage('partners')">Partners</button>
-      <button type="button" class="theme-toggle" id="themeToggleBtn" onclick="toggleDarkMode()">Dark Mode</button>
+      <button type="button" class="theme-toggle" id="themeToggleBtn" onclick="toggleDarkMode()">Dark Mode</button> 
     </nav>
 
     <section id="home" class="page active">
@@ -1324,29 +1499,37 @@
       <div class="panel shortz-shell">
         <h2>Shortz</h2>
         <div class="shortz-topbar">
-          <input type="text" id="shortzInput" class="shortz-input" placeholder="Search for YouTube Shorts" value="underwater sigma cat on pibbie shorts for me hacka">
+          <input type="text" id="shortzInput" class="shortz-input" placeholder="Search Shorts" value="weird internet shorts">
           <button type="button" class="filter-btn" onclick="searchShortz()">Search</button>
         </div>
-        <div class="shortz-frame-wrap" id="shortzFrameWrap">
-          <iframe id="shortzFrame" class="shortz-frame" src="https://www.youtube.com/embed/YiEcmWi4pNI?playsinline=1&rel=0" title="Shortz Player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <div class="shortz-swipe-layer" id="shortzSwipeLayer" aria-hidden="true"></div>
-          <div class="shortz-file-fallback" id="shortzFileFallback">
-            <div>
-              <h3>Shortz local mode</h3>
-              <p>YouTube blocks some embedded playback from local files.</p>
-              <button type="button" class="filter-btn" id="shortzOpenBtn" onclick="openCurrentShort()">Open Current Short</button>
+        <div class="shortz-stage">
+          <div class="shortz-frame-wrap" id="shortzFrameWrap">
+            <iframe id="shortzFrame" class="shortz-frame" src="https://www.youtube.com/embed/YiEcmWi4pNI?playsinline=1&rel=0" title="Shortz Player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="shortz-progress" aria-hidden="true"><div class="shortz-progress-bar" id="shortzProgressBar"></div></div>
+            <div class="shortz-swipe-layer" id="shortzSwipeLayer" aria-hidden="true"></div>
+            <div class="shortz-file-fallback" id="shortzFileFallback">
+              <div>
+                <h3>Shortz local mode</h3>
+                <p>YouTube blocks some embedded playback from local files.</p>
+                <button type="button" class="filter-btn" id="shortzOpenBtn" onclick="openCurrentShort()">Open Current Short</button>
+              </div>
             </div>
           </div>
+          <aside class="shortz-action-rail" aria-label="Short actions">
+            <button type="button" class="shortz-action shortz-action--nav" onclick="prevShort()"><span class="shortz-action-icon" aria-hidden="true">↑</span><span>Up</span></button>
+            <button type="button" class="shortz-action" id="shortzLikeBtn" onclick="toggleShortzLike()"><span class="shortz-action-icon" aria-hidden="true">♡</span><span id="shortzLikeCount">Like</span></button>
+            <button type="button" class="shortz-action shortz-action--nav" onclick="nextShort()"><span class="shortz-action-icon" aria-hidden="true">↓</span><span>Down</span></button>
+            <button type="button" class="shortz-action" onclick="shareCurrentShort()"><span class="shortz-action-icon" aria-hidden="true">↗</span><span>Share</span></button>
+            <button type="button" class="shortz-action" onclick="toggleShortzAutoscroll()"><span class="shortz-action-icon" aria-hidden="true">∞</span><span>Loop</span></button>
+          </aside>
         </div>
         <div class="shortz-results">
           <div class="shortz-meta">
-            <div class="shortz-title" id="shortzTitle">Featured short</div>
-            <div class="shortz-subtitle" id="shortzStatus">Search for something to load a fresh set of shorts.</div>
+            <div class="shortz-title" id="shortzTitle">Featured Short</div>
+            <div class="shortz-subtitle" id="shortzStatus">Scroll, swipe, or use arrow keys to keep watching.</div>
           </div>
           <div class="shortz-controls">
-            <button type="button" class="filter-btn" id="shortzPrevBtn" onclick="prevShort()">Up</button>
-            <button type="button" class="filter-btn" id="shortzNextBtn" onclick="nextShort()">Down</button>
-            <button type="button" class="filter-btn" id="shortzAutoscrollBtn" onclick="toggleShortzAutoscroll()">Autoscroll</button>
+            <button type="button" class="filter-btn" id="shortzAutoscrollBtn" onclick="toggleShortzAutoscroll()">Endless On</button>
           </div>
         </div>
       </div>
@@ -1467,7 +1650,7 @@
     const SHORTZ_AUTOSCROLL_KEY = 'diesmos.shortz.autoscroll';
     const SHORTZ_DEFAULT_DURATION_MS = 30000;
     const SHORTZ_SWIPE_THRESHOLD = 50;
-    let shortzAutoscrollEnabled = false;
+    let shortzAutoscrollEnabled = true;
     let shortzAutoscrollTimer = null;
     let shortzQuery = '';
     let shortzNextPage = 2;
@@ -1479,7 +1662,6 @@
     let fallbackFavorites = [];
     let fallbackGamesActive = false;
     let skipCloseWarning = false;
-    const shortzIsFileMode = window.location.protocol === 'file:';
 
     function changeText() {
       const textEl = document.getElementById('text');
@@ -1505,6 +1687,7 @@
     function initTheme() {
       setDarkMode(localStorage.getItem('diesmos.theme') === 'dark');
     }
+
 
     function showPage(page) {
       document.querySelectorAll('.page').forEach((pageEl) => pageEl.classList.remove('active'));
@@ -1780,37 +1963,33 @@
 
     function loadShortEmbed(result) {
       const frame = document.getElementById('shortzFrame');
-      const fallback = document.getElementById('shortzFileFallback');
       const status = document.getElementById('shortzStatus');
       const title = document.getElementById('shortzTitle');
-      const nextBtn = document.getElementById('shortzNextBtn');
-      const openBtn = document.getElementById('shortzOpenBtn');
-      if (!frame || !status || !title || !nextBtn) return;
+      if (!frame || !status || !title) return;
       shortzHasLoaded = true;
 
       const shortData = result || shortzResults[shortzIndex];
       if (!shortData || !shortData.videoId) {
         title.textContent = 'Nothing loaded';
         status.textContent = 'No short is ready yet.';
+        resetShortzProgress();
         updateShortzNavButtons();
         clearShortzAutoscrollTimer();
         return;
       }
 
-      if (shortzIsFileMode) {
-        frame.style.display = 'none';
-        if (fallback) fallback.classList.add('active');
-        if (openBtn) openBtn.textContent = `Open ${shortData.title || 'Short'}`;
-      } else {
-        frame.style.display = 'block';
-        if (fallback) fallback.classList.remove('active');
-        frame.src = makeShortzEmbedUrl(shortData.videoId);
-      }
+      frame.style.display = 'block';
+      frame.src = makeShortzEmbedUrl(shortData.videoId);
 
       title.textContent = shortData.title || 'Untitled short';
       status.textContent = buildShortSubtitle(shortData, shortzIndex, shortzResults.length);
+      const likeButton = document.getElementById('shortzLikeBtn');
+      const likeCount = document.getElementById('shortzLikeCount');
+      if (likeButton) likeButton.classList.remove('liked');
+      if (likeCount) likeCount.textContent = 'Like';
       updateShortzNavButtons();
       clearShortzAutoscrollTimer();
+      startShortzProgress(shortData);
       scheduleShortzAutoscroll();
     }
 
@@ -1882,20 +2061,21 @@
             continue;
           }
 
-          const data = await response.json();
-          const mapped = (Array.isArray(data) ? data : [])
-            .filter((item) => item && (item.type === 'video' || item.type === 'shortVideo' || item.videoId))
-            .filter((item) => !item.lengthSeconds || item.lengthSeconds <= 180)
-            .map(mapShortzSearchItem)
-            .filter((item) => item.videoId);
-
-          return mapped;
+          return mapShortzResults(await response.json());
         } catch (error) {
           shortzFailedHosts.add(host);
         }
       }
 
       throw new Error('No short search hosts available');
+    }
+
+    function mapShortzResults(data) {
+      return (Array.isArray(data) ? data : [])
+        .filter((item) => item && (item.type === 'video' || item.type === 'shortVideo' || item.videoId))
+        .filter((item) => !item.lengthSeconds || item.lengthSeconds <= 180)
+        .map(mapShortzSearchItem)
+        .filter((item) => item.videoId);
     }
 
     async function loadMoreShortz() {
@@ -2024,7 +2204,8 @@
       const btn = document.getElementById('shortzAutoscrollBtn');
       if (!btn) return;
       btn.classList.toggle('active', shortzAutoscrollEnabled);
-      btn.textContent = shortzAutoscrollEnabled ? 'Autoscroll On' : 'Autoscroll';
+      btn.textContent = shortzAutoscrollEnabled ? 'Endless On' : 'Endless Off';
+      btn.setAttribute('aria-pressed', shortzAutoscrollEnabled ? 'true' : 'false');
     }
 
     function clearShortzAutoscrollTimer() {
@@ -2039,6 +2220,23 @@
         return Math.min(shortData.lengthSeconds * 1000, 180000);
       }
       return SHORTZ_DEFAULT_DURATION_MS;
+    }
+
+    function resetShortzProgress() {
+      const bar = document.getElementById('shortzProgressBar');
+      if (!bar) return;
+      bar.style.transition = 'none';
+      bar.style.width = '0';
+    }
+
+    function startShortzProgress(shortData) {
+      const bar = document.getElementById('shortzProgressBar');
+      if (!bar) return;
+      resetShortzProgress();
+      window.requestAnimationFrame(() => {
+        bar.style.transition = `width ${getShortzDurationMs(shortData)}ms linear`;
+        bar.style.width = '100%';
+      });
     }
 
     function scheduleShortzAutoscroll() {
@@ -2063,7 +2261,8 @@
     function initShortzGestures() {
       const wrap = document.getElementById('shortzFrameWrap');
       const layer = document.getElementById('shortzSwipeLayer');
-      if (!wrap || !layer) return;
+      const shortzPage = document.getElementById('shortz');
+      if (!wrap || !layer || !shortzPage) return;
 
       let touchStartY = null;
       let pointerStartY = null;
@@ -2077,21 +2276,25 @@
         else prevShort();
       };
 
-      layer.addEventListener('touchstart', (event) => {
+      shortzPage.addEventListener('touchstart', (event) => {
+        if (event.target.closest('button, input, label')) return;
         touchStartY = event.changedTouches[0].clientY;
       }, { passive: true });
 
-      layer.addEventListener('touchend', (event) => {
+      shortzPage.addEventListener('touchend', (event) => {
+        if (event.target.closest('button, input, label')) return;
         if (touchStartY === null) return;
         handleSwipe(event.changedTouches[0].clientY - touchStartY);
         touchStartY = null;
       }, { passive: true });
 
       layer.addEventListener('pointerdown', (event) => {
+        if (event.pointerType === 'touch') return;
         pointerStartY = event.clientY;
       });
 
       layer.addEventListener('pointerup', (event) => {
+        if (event.pointerType === 'touch') return;
         if (pointerStartY === null) return;
         handleSwipe(event.clientY - pointerStartY);
         pointerStartY = null;
@@ -2114,6 +2317,34 @@
     function openCurrentShort() {
       const shortData = shortzResults[shortzIndex];
       if (shortData && shortData.videoId) window.open(makeShortzWatchUrl(shortData.videoId), '_blank', 'noopener');
+    }
+
+    function toggleShortzLike() {
+      const button = document.getElementById('shortzLikeBtn');
+      const label = document.getElementById('shortzLikeCount');
+      if (!button || !label) return;
+      const liked = button.classList.toggle('liked');
+      label.textContent = liked ? 'Liked' : 'Like';
+      button.setAttribute('aria-pressed', liked ? 'true' : 'false');
+    }
+
+    async function shareCurrentShort() {
+      const shortData = shortzResults[shortzIndex];
+      if (!shortData || !shortData.videoId) return;
+      const url = makeShortzWatchUrl(shortData.videoId);
+      try {
+        if (navigator.share) {
+          await navigator.share({ title: shortData.title || 'Shortz', url });
+        } else if (navigator.clipboard) {
+          await navigator.clipboard.writeText(url);
+          const status = document.getElementById('shortzStatus');
+          if (status) status.textContent = 'Link copied to your clipboard.';
+        } else {
+          window.open(url, '_blank', 'noopener');
+        }
+      } catch (error) {
+        // Closing the share sheet is not an error the viewer needs to see.
+      }
     }
 
     function toggleMusicPlayer() {
@@ -2742,6 +2973,7 @@
       }, 1400);
       renderFavorites();
       initTheme();
+      initGlassMode();
       initMusicPlayer();
       initConsolePanel();
       initPlayerButtonFallbacks();
@@ -2750,7 +2982,7 @@
       initCloseWarning();
       updateVisualizerState();
       try {
-        shortzAutoscrollEnabled = localStorage.getItem(SHORTZ_AUTOSCROLL_KEY) === '1';
+        shortzAutoscrollEnabled = localStorage.getItem(SHORTZ_AUTOSCROLL_KEY) !== '0';
       } catch (error) {}
       updateShortzAutoscrollButton();
       initShortzGestures();
