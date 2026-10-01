@@ -88,13 +88,6 @@ function extractGamePath(fullUrl) {
 
 
 const games = [
-   {
-    id: 1,
-    title: "Anti Terrorist Rush",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/anti-terrorist-rush.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/whatver/anti-terrorist-rush/",
-    isNew: false
-  },
   {
     id: 2,
     title: "Bad Ice Cream 2",
@@ -173,27 +166,6 @@ const games = [
     isNew: false
   },
   {
-    id: 14,
-    title: "2048 Merge Run",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/2048-merge-run.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/2048-merge-run/",
-    isNew: false
-  },
-  {
-    id: 15,
-    title: "Build a Big Army",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/build-a-big-army.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/build-a-big-army/",
-    isNew: false
-  },
-  {
-    id: 16,
-    title: "1010 Deluxe",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/1010deluxe.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/schol/1010deluxe/",
-    isNew: false
-  },
-  {
     id: 17,
     title: "3 Pandas",
     image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/build-a-big-army.jpg",
@@ -222,55 +194,6 @@ const games = [
     isNew: false
   },
   {
-    id: 21,
-    title: "Build a Plane",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/build-a-plane.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/build-a-plane/",
-    isNew: false
-  },
-  {
-    id: 22,
-    title: "Camouflage and Sniper",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/camouflage-and-sniper.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/camouflage-and-sniper/",
-    isNew: false
-  },
-  {
-    id: 23,
-    title: "Car Survival 3D",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/car-survival-3d.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/car-survival-3d/",
-    isNew: false
-  },
-  {
-    id: 24,
-    title: "City Defense",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/city-defense.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/city-defense/",
-    isNew: false
-  },
-  {
-    id: 25,
-    title: "Clothing Shop 3D",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/clothing-shop-3d.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/clothing-shop-3d/",
-    isNew: false
-  },
-  {
-    id: 26,
-    title: "Cool Cars Run 3D",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/cool-cars-run-3d.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/cool-cars-run-3d/",
-    isNew: false
-  },
-  {
-    id: 27,
-    title: "Crush Cars 3D",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/crush-cars-3d.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/crush-cars-3d/",
-    isNew: false
-  },
-  {
     id: 28,
     title: "Scarlet Shift",
     image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/scarletshift.jpg",
@@ -289,13 +212,6 @@ const games = [
     title: "Renegade Rally",
     image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/renegaderally.jpg",
     url: "player.html?game=https://chicken.parmacitieschools.org/schol/renegaderally/",
-    isNew: false
-  },
-  {
-    id: 31,
-    title: "Destroy the Car 3D",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/destroy-the-car-3d.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/destroy-the-car-3d/",
     isNew: false
   },
   {
@@ -387,41 +303,6 @@ const games = [
     title: "Super Mario Micro Land",
     image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/super-mario-micro-land.jpg",
     url: "player.html?game=https://chicken.parmacitieschools.org/assets/super-mario-micro-land/",
-    isNew: false
-  },
-  {
-    id: 45,
-    title: "Diamond Seeker",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/diamond-seeker.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/diamond-seeker/",
-    isNew: false
-  },
-  {
-    id: 46,
-    title: "Draw Joust",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/draw-joust.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/draw-joust/",
-    isNew: false
-  },
-  {
-    id: 47,
-    title: "Evolving Bombs 3D",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/evolving-bombs-3d.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/evolving-bombs-3d/",
-    isNew: false
-  },
-  {
-    id: 48,
-    title: "Fire and Frost Master",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/fire-and-frost-master.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/fire-and-frost-master/",
-    isNew: false
-  },
-  {
-    id: 49,
-    title: "Fitness Empire",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/fitness-empire.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/fitness-empire/",
     isNew: false
   },
   {
@@ -733,237 +614,6 @@ const games = [
     isNew: false
   },
   {
-    id: 94,
-    title: "Flick Goal",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/flick-goal.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/flick-goal/",
-    isNew: false
-  },
-  {
-    id: 95,
-    title: "Flip Master",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/flip-master.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/flip-master/",
-    isNew: false
-  },
-  {
-    id: 96,
-    title: "Giant Wanted",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/giant-wanted.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/giant-wanted/",
-    isNew: false
-  },
-  {
-    id: 97,
-    title: "Gun Clone",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/gun-clone.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/gun-clone/",
-    isNew: false
-  },
-  {
-    id: 98,
-    title: "Gun Runner",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/gun-runner.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/gun-runner/",
-    isNew: false
-  },
-  {
-    id: 99,
-    title: "High Heels",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/high-heels.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/high-heels/",
-    isNew: false
-  },
-  {
-    id: 100,
-    title: "Kaji Run",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/kaji-run.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/kaji-run/",
-    isNew: false
-  },
-  {
-    id: 101,
-    title: "Make a Superboat",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/make-a-superboat.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/make-a-superboat/",
-    isNew: false
-  },
-  {
-    id: 102,
-    title: "Makeover Run",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/makeover-run.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/makeover-run/",
-    isNew: false
-  },
-  {
-    id: 103,
-    title: "Mega Car Jumps",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/mega-car-jumps.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/mega-car-jumps/",
-    isNew: false
-  },
-  {
-    id: 104,
-    title: "Money Rush",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/money-rush.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/money-rush/",
-    isNew: false
-  },
-  {
-    id: 105,
-    title: "Monster Box 3D",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/monster-box-3d.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/monster-box-3d/",
-    isNew: false
-  },
-  {
-    id: 106,
-    title: "Office Fight",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/office-fight.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/office-fight/",
-    isNew: false
-  },
-  {
-    id: 107,
-    title: "Robot Invasion",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/robot-invasion.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/robot-invasion/",
-    isNew: false
-  },
-  {
-    id: 108,
-    title: "Run Rich 3D",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/run-rich-3d.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/run-rich-3d/",
-    isNew: false
-  },
-  {
-    id: 109,
-    title: "Save P Diddy From Prison",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/save-p-diddy-from-prison.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/save-p-diddy-from-prison/",
-    isNew: false
-  },
-  {
-    id: 110,
-    title: "Seat Jam 3D",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/seat-jam-3d.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/seat-jam-3d/",
-    isNew: false
-  },
-  {
-    id: 111,
-    title: "Shooting Master",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/shooting-master.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/shooting-master/",
-    isNew: false
-  },
-  {
-    id: 112,
-    title: "Supermarket 3D",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/supermarket-3d.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/supermarket-3d/",
-    isNew: false
-  },
-  {
-    id: 113,
-    title: "Survive to Victory",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/survive-to-victory.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/survive-to-victory/",
-    isNew: false
-  },
-  {
-    id: 114,
-    title: "Telekinesis Attack",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/telekinesis-attack.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/telekinesis-attack/",
-    isNew: false
-  },
-  {
-    id: 115,
-    title: "Telekinesis Car",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/telekinesis-car.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/telekinesis-car/",
-    isNew: false
-  },
-  {
-    id: 116,
-    title: "Telekinesis Drive",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/telekinesis-drive.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/telekinesis-drive/",
-    isNew: false
-  },
-  {
-    id: 117,
-    title: "Telekinesis",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/telekinesis.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/telekinesis/",
-    isNew: false
-  },
-  {
-    id: 118,
-    title: "Triple Match 3D",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/triple-match-3d.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/triple-match-3d/",
-    isNew: false
-  },
-  {
-    id: 119,
-    title: "Tug of War With Cars",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/tug-of-war-with-cars.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/tug-of-war-with-cars/",
-    isNew: false
-  },
-  {
-    id: 120,
-    title: "Twerk Race 3D",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/twerk-race-3d.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/twerk-race-3d/",
-    isNew: false
-  },
-  {
-    id: 121,
-    title: "Twisted Rope 3D",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/twisted-rope-3d.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/twisted-rope-3d/",
-    isNew: false
-  },
-  {
-    id: 122,
-    title: "Wall Crawler",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/wall-crawler.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/wall-crawler/",
-    isNew: false
-  },
-  {
-    id: 123,
-    title: "War Regions",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/war-regions.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/war-regions/",
-    isNew: false
-  },
-  {
-    id: 124,
-    title: "Weapon Craft Run",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/weapon-craft-run.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/weapon-craft-run/",
-    isNew: false
-  },
-  {
-    id: 125,
-    title: "Weapon Upgrade Rush",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/weapon-upgrade-rush.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/weapon-upgrade-rush/",
-    isNew: false
-  },
-  {
-    id: 126,
-    title: "Wheel Scale",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/wheel-scale.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/brainrot/wheel-scale/",
-    isNew: false
-  },
-  {
     id: 127,
     title: "Class of '09: The Re-Up",
     image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/re-up.jpg",
@@ -1167,13 +817,6 @@ const games = [
     isNew: false
   },
   {
-    id: 157,
-    title: "Slither.io Online",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/slitherio.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/whatver/slitherio/",
-    isNew: false
-  },
-  {
     id: 158,
     title: "The Race",
     image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/therace.jpg",
@@ -1213,13 +856,6 @@ const games = [
     title: "Parking Lot Wars",
     image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/parkinglotwars.jpg",
     url: "player.html?game=https://chicken.parmacitieschools.org/whatver/parkinglotwars/",
-    isNew: false
-  },
-  {
-    id: 164,
-    title: "Police Getaway",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/police.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/whatver/police/",
     isNew: false
   },
   {
@@ -1416,13 +1052,6 @@ const games = [
     title: "Winter Clash 3D",
     image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/winter-clash-3d.jpg",
     url: "player.html?game=https://chicken.parmacitieschools.org/whatver/winter-clash-3d/",
-    isNew: false
-  },
-  {
-    id: 194,
-    title: "Color Pencil Run",
-    image: "https://testingcf.jsdelivr.net/gh/waycrosspublicmedia/images@main/color-pencil-run.jpg",
-    url: "player.html?game=https://chicken.parmacitieschools.org/whatver/color-pencil-run/",
     isNew: false
   },
   {
