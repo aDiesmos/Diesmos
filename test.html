@@ -942,6 +942,27 @@ body:has(#gameOverlay.active) .console-panel { visibility: hidden; }
 	  .shortz-action { font-size: 0.65rem; }
 	  .shortz-results { align-items: flex-start; flex-direction: column; }
 	}
+	  .diestube-shell { display: grid; gap: 16px; }
+.diestube-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; }
+.diestube-header h2 { margin: 0; }
+.diestube-subtitle { max-width: 62ch; margin: 8px 0 0; color: var(--muted); line-height: 1.55; font-size: .9rem; }
+.diestube-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.diestube-bar { display: flex; gap: 8px; flex-wrap: wrap; align-items: stretch; }
+.diestube-input { flex: 1 1 320px; min-height: 46px; padding: 0 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-3); color: var(--text); font: inherit; outline: none; }
+.diestube-input:focus { border-color: var(--brand); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 14%, transparent); background: var(--surface-2); }
+.diestube-select { min-height: 46px; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-3); color: var(--text); font: inherit; font-weight: 700; cursor: pointer; }
+
+.diestube-frame-wrap { position: relative; width: 100%; aspect-ratio: 16 / 10; min-height: 520px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #000; }
+.diestube-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
+.diestube-loading { position: absolute; inset: 0; display: grid; place-items: center; color: #fff; background: #0a130d; font-weight: 800; z-index: 1; }
+.diestube-loading[hidden] { display: none; }
+.diestube-status { padding: 10px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-3); color: var(--muted); font-size: .82rem; font-weight: 700; }
+
+@media (max-width: 820px) {
+  .diestube-frame-wrap { min-height: 460px; aspect-ratio: auto; }
+  .diestube-actions { width: 100%; }
+}
     .console-panel {
       position: fixed;
       right: 18px;
@@ -1344,9 +1365,10 @@ body:has(#gameOverlay.active) .console-panel { visibility: hidden; }
     <nav class="main-nav" aria-label="Main pages">
       <button type="button" class="nav-btn active" data-page-link="home" onclick="showPage('home')">Home</button>
       <button type="button" class="nav-btn" data-page-link="games" onclick="showPage('games')">Games</button>
+	  <button type="button" class="nav-btn" data-page-link="diestube" onclick="showPage('diestube')">DiesTube</button>
       <button type="button" class="nav-btn" data-page-link="music" onclick="showPage('music')">Music</button>
-	    <button type="button" class="nav-btn" data-page-link="shortz" onclick="showPage('shortz')">Shortz</button>
-      <button type="button" class="nav-btn" onclick="window.open('https://discord.gg/pSzqUMzfZR', '_blank', 'noopener')">Discord</button>
+	  <button type="button" class="nav-btn" data-page-link="shortz" onclick="showPage('shortz')">Shortz</button>
+      <button type="button" class="nav-btn" onclick="window.open('https://discord.gg/diesmos', '_blank', 'noopener')">Discord</button>
       <button type="button" class="nav-btn" onclick="window.open('https://diesmos.online/news.html', '_blank', 'noopener')">News</button>
       <button type="button" class="nav-btn theme-toggle" id="themeToggleBtn" onclick="toggleDarkMode()">Dark Mode</button>
     </nav>
@@ -1439,6 +1461,41 @@ body:has(#gameOverlay.active) .console-panel { visibility: hidden; }
         <section class="games-container" aria-label="Game library">
           <div id="gamesGrid" class="games-grid"></div>
         </section>
+		  <section id="diestube" class="page">
+  <section class="panel diestube-shell">
+    <div class="diestube-header">
+      <div>
+        <p class="eyebrow">YOUTUBE FRONTEND</p>
+        <h2>DiesTube</h2>
+        <p class="diestube-subtitle">A privacy-friendly YouTube viewer powered by Invidious. Pick a healthy instance, then search or paste a video ID / URL.</p>
+      </div>
+      <div class="diestube-actions">
+        <button type="button" class="filter-btn" id="diestubeReloadBtn" onclick="reloadDiesTubeInstance()">Reload Instance</button>
+        <button type="button" class="filter-btn" onclick="openDiesTubeExternal()">Open In New Tab</button>
+      </div>
+    </div>
+
+    <div class="diestube-bar">
+      <input type="text" id="diestubeInput" class="diestube-input"
+             placeholder="Search YouTube or paste a video URL / ID…"
+             autocomplete="off">
+      <button type="button" class="filter-btn" onclick="runDiesTubeSearch()">Search</button>
+      <select id="diestubeInstanceSelect" class="diestube-select" onchange="switchDiesTubeInstance(this.value)"></select>
+    </div>
+
+    <div class="diestube-frame-wrap">
+      <div class="diestube-loading" id="diestubeLoading">Connecting to Invidious…</div>
+      <iframe id="diestubeFrame" class="diestube-frame"
+        src="about:blank"
+        title="DiesTube"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
+
+    <div class="diestube-status" id="diestubeStatus">Ready.</div>
+  </section>
+</section>
       </section>
     </section>
 <section id="shortz" class="page">
@@ -1728,7 +1785,36 @@ body:has(#gameOverlay.active) .console-panel { visibility: hidden; }
         finishGenieCloseGame();
         return;
       }
+function showPage(page) {
+  const shortzPage = document.getElementById('shortz');
+  const diestubePage = document.getElementById('diestube');
 
+  if (shortzPage && shortzPage.classList.contains('active') && page !== 'shortz') {
+    unloadShortz();
+    fadeMusicForShortzExit();
+  }
+
+  if (diestubePage && diestubePage.classList.contains('active') && page !== 'diestube') {
+    unloadDiesTube();
+  }
+
+  document.querySelectorAll('.page').forEach((pageEl) => pageEl.classList.remove('active'));
+  document.querySelectorAll('[data-page-link]').forEach((link) => link.classList.toggle('active', link.dataset.pageLink === page));
+  const target = document.getElementById(page);
+  if (target) target.classList.add('active');
+
+  if (page === 'shortz') {
+    const audio = document.getElementById('musicAudio');
+    if (audio && !audio.paused) audio.pause();
+    if (!shortzHasLoaded) loadShortEmbed();
+  }
+
+  if (page === 'diestube') {
+    const audio = document.getElementById('musicAudio');
+    if (audio && !audio.paused) audio.pause();
+    if (!diestubeHasLoaded) loadDiesTube();
+  }
+}
       document.body.style.overflow = '';
       overlay.classList.remove('active');
       overlay.classList.add('closing');
